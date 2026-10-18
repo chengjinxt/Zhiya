@@ -40,6 +40,25 @@ Zhiya/
 └── releases/          # 各阶段发布产物归档，命名：zhiya-<阶段>-vX.Y.Z-<机型>-<日期>/
 ```
 
+## 开发环境（2026-10-18 落地，Windows）
+
+- Android Studio：Rabbit 1（2026.2.1.8），`D:\Program Files\Android\Android Studio`
+  （bin\studio64.exe；开始菜单有所有用户快捷方式；自带 JBR 25 在 `jbr\`）
+  - 注意：官方 exe 安装器在**非交互会话**（SSH / SYSTEM 计划任务）下静默安装会直接 1223 取消，
+    改用官方 `android-studio-rabbit1-windows.zip` 解压安装（SHA-256 已对官网值验过），效果等同。
+- JDK 17：`D:\DevTools\jdk-17`（Microsoft OpenJDK 17.0.20.1，给 sdkmanager/Gradle 用）
+- Android SDK：`D:\DevTools\Android\Sdk`
+  - cmdline-tools：`D:\DevTools\Android\cmdline-tools\latest`（build 13114758）
+  - 已装包：platform-tools r37.0.1（adb 1.0.41 / fastboot 37.0.1）、platforms;android-35、build-tools;35.0.0
+  - 注意：sdkmanager 新版 bat 的 JDK 版本检查有坑，认不出部分 JDK 17 输出，跑之前设
+    `SKIP_JDK_VERSION_CHECK=true`；许可证走 `Sdk\licenses\android-sdk-license` 预置或交互输入 y。
+- 系统环境变量：`ANDROID_HOME` / `ANDROID_SDK_ROOT` = `D:\DevTools\Android\Sdk`；
+  `JAVA_HOME` = `D:\DevTools\jdk-17`；PATH 追加 `Sdk\platform-tools` 与 `jdk-17\bin`
+  （机器上另有旧 Java 8 在 `C:\Java`，不动它，Gradle/Android Studio 都走 JAVA_HOME/jbr）。
+- 下载经验：dl.google.com 直连经常抖动/极慢，`redirector.gvt1.com/edgedl/...` 302 跳转后的
+  节点时快时慢（曾跑到 14MB/s，也曾 TLS 握手失败），多试几次或换时段；大文件务必 curl `-C -`
+  断点续传；BITS 在 SSH 非交互会话下报 0x800704DD 不可用。
+
 ## 约定
 
 - `docs/` 新增文档按编号续写，保持"原理 → 方案 → 实施"顺序。
