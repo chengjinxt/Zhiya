@@ -51,6 +51,8 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
     implementation("androidx.compose.material:material-icons-core")
+    // 扩展图标集：HomeScreen 用到的 Description / Message / PlayCircle 不在 core 子集里
+    implementation("androidx.compose.material:material-icons-extended")
 
     // M2+ 按需加：room、media3-exoplayer、pdfviewer 等
 }
